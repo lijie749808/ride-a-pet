@@ -1,0 +1,27 @@
+{
+  "id": "watering-can",
+  "name": "Watering Can",
+  "description": "A basic watering can for watering crops. Can be upgraded at the blacksmith to hold more water and cover larger areas.",
+  "image": "/images/items/watering-can.svg",
+  "type": "Tool",
+  "rarity": "Common",
+  "sellPrice": 50,
+  "buyPrice": 200,
+  "stats": {
+    "Base Capacity": "40 uses",
+    "Tiles Watered": "1 per use",
+    "Upgradeable": "Yes (4 tiers)"
+  },
+  "obtainMethods": [
+    {
+      "method": "Starting Item",
+      "details": "Given to the player at the beginning of the game"
+    },
+    {
+      "method": "Shop",
+      "details": "Pierre's General Store — 200g"
+    }
+  ],
+  "tags": ["tool", "farming", "water", "starter"],
+  "relatedItems": ["sprinkler", "quality-sprinkler"]
+}

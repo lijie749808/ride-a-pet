@@ -1,0 +1,22 @@
+{
+  "id": "sprinkler",
+  "name": "Sprinkler",
+  "description": "Automatically waters crops in a 3x3 area each morning, freeing you from daily watering chores.",
+  "image": "/images/items/sprinkler.svg",
+  "type": "Tool",
+  "rarity": "Uncommon",
+  "sellPrice": 150,
+  "stats": {
+    "Water Range": "3x3 tiles",
+    "Durability": "Unlimited",
+    "Charges per Day": 1
+  },
+  "obtainMethods": [
+    {
+      "method": "Crafting",
+      "details": "Unlocked at Farming Level 6. Requires: 1 Copper Bar + 1 Iron Bar"
+    }
+  ],
+  "tags": ["tool", "farming", "water", "automation"],
+  "relatedItems": ["watering-can", "quality-sprinkler"]
+}

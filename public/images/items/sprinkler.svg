@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <rect width="120" height="120" rx="16" fill="#FFF7ED"/>
+  <rect x="10" y="10" width="100" height="100" rx="12" fill="#FFEDD5" stroke="#FED7AA" stroke-width="2"/>
+  <!-- Sprinkler body -->
+  <rect x="50" y="70" width="20" height="28" rx="4" fill="#92400E"/>
+  <!-- Sprinkler head -->
+  <ellipse cx="60" cy="66" rx="18" ry="8" fill="#B45309"/>
+  <!-- Water drops -->
+  <circle cx="30" cy="44" r="5" fill="#60A5FA" opacity="0.9"/>
+  <circle cx="45" cy="35" r="4" fill="#93C5FD" opacity="0.8"/>
+  <circle cx="60" cy="30" r="5" fill="#60A5FA" opacity="0.9"/>
+  <circle cx="75" cy="35" r="4" fill="#93C5FD" opacity="0.8"/>
+  <circle cx="90" cy="44" r="5" fill="#60A5FA" opacity="0.9"/>
+  <!-- Water lines -->
+  <line x1="42" y1="58" x2="30" y2="44" stroke="#BFDBFE" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="50" y1="56" x2="45" y2="35" stroke="#BFDBFE" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="60" y1="58" x2="60" y2="30" stroke="#BFDBFE" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="70" y1="56" x2="75" y2="35" stroke="#BFDBFE" stroke-width="2" stroke-dasharray="3,2"/>
+  <line x1="78" y1="58" x2="90" y2="44" stroke="#BFDBFE" stroke-width="2" stroke-dasharray="3,2"/>
+</svg>
