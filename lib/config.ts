@@ -42,7 +42,7 @@ export const siteConfig = {
      * Google Analytics 4 Measurement ID (for example: G-XXXXXXXXXX).
      * Paste the ID here to enable Google Analytics; leave it empty to disable tracking.
      */
-    googleAnalyticsId: '',
+    googleAnalyticsId: 'G-JVDJZBGW6L',
     /** Microsoft Clarity 项目 ID（仅填写 ID，不要粘贴整段脚本）。 */
     clarityProjectId: '',
   },
