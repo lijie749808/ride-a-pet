@@ -43,7 +43,7 @@ export function ArticleTemplate({ meta, content, breadcrumbLabel, section }: Art
         </div>
       )}
 
-      <article className="prose prose-neutral dark:prose-invert max-w-none prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline">
+      <article className="prose prose-neutral dark:prose-invert max-w-none prose-a:text-primary prose-a:font-medium prose-a:no-underline hover:prose-a:underline prose-pre:border prose-pre:border-border prose-pre:bg-card prose-pre:text-foreground prose-th:text-foreground">
         {content}
       </article>
     </div>

@@ -1,264 +1,137 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import {
-  ChevronRight,
-  Play,
-  Calendar,
-  Code2,
-  Gamepad2,
-  Backpack,
-  Swords,
-  PawPrint,
-  Map as MapIcon,
-  Users,
-  ScrollText,
-  BookOpen,
+  ArrowRight, ArrowUpRight, BookOpen, Egg, MapPin, Newspaper,
+  PawPrint, RotateCcw, Settings2, Sparkles, Utensils, CalendarDays,
   type LucideIcon,
 } from 'lucide-react';
-import type { Item, ArticleMeta } from '@/lib/schema';
+import type { ArticleMeta } from '@/lib/schema';
 import { siteConfig } from '@/lib/config';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-
-function DiscordIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
-      <path d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
-    </svg>
-  );
-}
 
 const DB_ICONS: Record<string, LucideIcon> = {
-  Items: Backpack,
-  Weapons: Swords,
-  Pets: PawPrint,
-  Locations: MapIcon,
-  NPCs: Users,
-  Quests: ScrollText,
+  Pets: PawPrint, Eggs: Egg, Rebirths: RotateCcw, Locations: MapPin,
+  Mutations: Sparkles, Gears: Settings2, Food: Utensils,
 };
 
 interface HomePageProps {
-  recentItems: Item[];
   latestGuides: ArticleMeta[];
+  latestUpdates: ArticleMeta[];
+  latestEvents: ArticleMeta[];
   counts: Record<string, number>;
 }
 
-export function HomePage({ recentItems, latestGuides, counts }: HomePageProps) {
+export function HomePage({ latestGuides, latestUpdates, latestEvents, counts }: HomePageProps) {
   const { homepage } = siteConfig;
-  const featuredGuides = latestGuides.length > 0
-    ? latestGuides.slice(0, 3)
-    : homepage.guides.fallback;
 
   return (
-    <div className="bg-background min-h-screen">
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden border-b bg-linear-to-br from-indigo-50 via-background to-violet-100/50 dark:from-indigo-950/40 dark:via-background dark:to-violet-950/30">
-        {/* soft glow for depth */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-24 left-1/2 -translate-x-1/2 h-64 w-2xl rounded-full bg-indigo-400/20 blur-3xl dark:bg-indigo-500/10"
-        />
-        <div className="relative max-w-4xl mx-auto px-4 py-14 sm:py-16 text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            <span className="bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent dark:from-indigo-400 dark:to-violet-400">
-              {siteConfig.name}
-            </span>
-          </h1>
-          <p className="mt-3 text-muted-foreground text-lg sm:text-xl max-w-xl mx-auto leading-relaxed">
-            {siteConfig.tagline}
+    <div className="mx-auto max-w-6xl px-4 pb-6 sm:px-6">
+      <section className="flex items-center justify-between gap-6 border-b py-10 sm:py-14" aria-labelledby="welcome-title">
+        <div className="max-w-2xl">
+          <p className="mb-4 flex items-center gap-2 font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-muted-foreground">
+            <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />The community field guide
           </p>
-
-          {/* Game meta tags */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-            {siteConfig.hero.developer && (
-              <Badge variant="secondary" className="gap-1.5 px-3 py-1 text-sm font-medium">
-                <Code2 className="size-3.5" />
-                {siteConfig.hero.developer}
-              </Badge>
-            )}
-            {siteConfig.hero.releaseDate && (
-              <Badge variant="secondary" className="gap-1.5 px-3 py-1 text-sm font-medium">
-                <Calendar className="size-3.5" />
-                {siteConfig.hero.releaseDate}
-              </Badge>
-            )}
-            {siteConfig.hero.genre && (
-              <Badge variant="secondary" className="gap-1.5 px-3 py-1 text-sm font-medium">
-                <Gamepad2 className="size-3.5" />
-                {siteConfig.hero.genre}
-              </Badge>
-            )}
-          </div>
-
-          {/* Call-to-action buttons */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            {siteConfig.hero.links.roblox && (
-              <Button asChild size="lg">
-                <a href={siteConfig.hero.links.roblox} target="_blank" rel="noopener noreferrer">
-                  <Play className="size-4 fill-current" />
-                  {siteConfig.hero.buttonLabels.roblox}
-                </a>
-              </Button>
-            )}
-            {siteConfig.hero.links.discord && (
-              <Button asChild size="lg" variant="outline">
-                <a href={siteConfig.hero.links.discord} target="_blank" rel="noopener noreferrer">
-                  <DiscordIcon className="size-4" />
-                  {siteConfig.hero.buttonLabels.discord}
-                </a>
-              </Button>
-            )}
-          </div>
+          <h1 id="welcome-title" className="text-4xl font-bold tracking-tight sm:text-5xl">{siteConfig.name}</h1>
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">{siteConfig.tagline}</p>
+          <p className="mt-3 max-w-xl text-sm leading-6 text-muted-foreground">{siteConfig.description}</p>
+          <Link href="#database" className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline">
+            Explore the wiki<ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="hidden shrink-0 rounded-3xl border bg-card p-5 sm:block">
+          <Image src={siteConfig.logo} alt="" width={112} height={112} className="size-28 object-contain" />
         </div>
       </section>
 
-      <main className="max-w-6xl mx-auto px-4 py-12 sm:py-16 space-y-14">
-        {/* ── Explore database ── */}
-        <section>
-          <SectionHeader title={homepage.database.title} subtitle={homepage.database.subtitle} />
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-            {siteConfig.dbCategories.map((category) => {
-              const Icon = DB_ICONS[category.label];
-              const count = counts[category.label.toLowerCase()];
-
-              return (
-                <Link key={category.href} href={category.href} className="group">
-                  <Card className="h-full p-4 text-center transition-all hover:-translate-y-0.5 hover:border-indigo-400 hover:shadow-md">
-                    <Icon className="size-6 mx-auto text-indigo-600 dark:text-indigo-400" strokeWidth={1.8} />
-                    <p className="mt-2 font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400">{category.label}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {count === undefined ? homepage.database.emptyCountLabel : `${count} ${homepage.database.countSuffix}`}
-                    </p>
-                  </Card>
-                </Link>
-              );
-            })}
+      <section id="database" aria-labelledby="database-title" className="py-9 sm:py-10">
+        <div className="mb-5 flex items-start justify-between gap-4">
+          <div>
+            <h2 id="database-title" className="text-xl font-semibold tracking-tight">{homepage.database.title}</h2>
+            <p className="mt-1 text-sm text-muted-foreground">{homepage.database.subtitle}</p>
           </div>
-        </section>
-
-        {/* ── Game overview ── */}
-        <section>
-          <SectionHeader title={homepage.overview.title} subtitle={homepage.overview.subtitle} />
-          <div className="grid gap-4 md:grid-cols-3">
-            {homepage.overview.cards.map((card) => {
-              const description = 'recentItemsDescription' in card && recentItems.length > 0
-                ? card.recentItemsDescription.replace('{count}', String(recentItems.length)).replace('{plural}', recentItems.length === 1 ? '' : 's')
-                : ('description' in card ? card.description : card.emptyDescription);
-
-              return (
-                <Card key={card.title} className="p-5">
-                  <h3 className="font-semibold">{card.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-                </Card>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ── Latest updates ── */}
-        <section>
-          <SectionHeader title={homepage.updates.title} href={homepage.updates.href} linkLabel={homepage.updates.linkLabel} />
-          <div className="grid gap-3 md:grid-cols-3">
-            {homepage.updates.entries.map((update) => (
-              <Link key={update.version} href={homepage.updates.href} className="group">
-                <Card className="h-full p-5 transition-all hover:border-indigo-400 hover:shadow-md">
-                  <Badge variant="secondary">{update.version}</Badge>
-                  <h3 className="mt-3 font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400">{update.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{update.description}</p>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Popular guides ── */}
-        <section>
-          <SectionHeader title={homepage.guides.title} href={homepage.guides.href} linkLabel={homepage.guides.linkLabel} />
-          <div className="grid gap-3 md:grid-cols-3">
-            {featuredGuides.map((guide) => (
-              <Link key={guide.slug} href={`${homepage.guides.href}/${guide.slug}`} className="group">
-                <Card className="h-full p-5 transition-all hover:border-indigo-400 hover:shadow-md">
-                  <BookOpen className="size-5 text-indigo-600 dark:text-indigo-400" />
-                  <h3 className="mt-3 font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400">{guide.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{guide.description}</p>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Tools ── */}
-        <section>
-          <SectionHeader title={homepage.tools.title} subtitle={homepage.tools.subtitle} />
-          <div className="grid gap-3 sm:grid-cols-2">
-            {homepage.tools.entries.map((tool) => (
-              <Link key={tool.href} href={tool.href} className="group">
-                <Card className="p-5 transition-all hover:border-indigo-400 hover:shadow-md">
-                  <h3 className="font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400">{tool.title}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{tool.description}</p>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ── FAQ ── */}
-        <section>
-          <SectionHeader title={homepage.faq.title} href={homepage.faq.href} linkLabel={homepage.faq.linkLabel} />
-          <Card className="divide-y p-0">
-            {homepage.faq.entries.map((faq) => (
-              <details key={faq.question} className="group px-5 py-4">
-                <summary className="cursor-pointer list-none font-semibold flex items-center justify-between gap-4">
-                  {faq.question}
-                  <ChevronRight className="size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-90" />
-                </summary>
-                <p className="pt-3 text-sm leading-relaxed text-muted-foreground">{faq.answer}</p>
-              </details>
-            ))}
-          </Card>
-        </section>
-      </main>
-
-      {/* ── Footer ── */}
-      <footer className="mt-16 border-t bg-card">
-        <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>{siteConfig.logo} {siteConfig.name} — {siteConfig.footer.description}</p>
-          <div className="flex items-center gap-5">
-            {siteConfig.footer.links.map((link) => (
-              <Link key={link.href} href={link.href} className="hover:text-foreground transition-colors">{link.label}</Link>
-            ))}
-          </div>
+          <span className="shrink-0 pt-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground">{String(siteConfig.dbCategories.length).padStart(2, '0')} categories</span>
         </div>
-      </footer>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-7">
+          {siteConfig.dbCategories.map((category) => {
+            const Icon = DB_ICONS[category.label];
+            const count = counts[category.href.slice(1)] ?? 0;
+            return (
+              <Link key={category.href} href={category.href} className="group rounded-xl">
+                <Card className="h-full gap-0 border-border bg-card p-4 shadow-none transition-colors group-hover:border-primary/50 group-hover:bg-accent/50">
+                  <div className="mb-5 flex items-center justify-between">
+                    <Icon className="size-6 text-primary" strokeWidth={1.5} aria-hidden="true" />
+                    <ArrowUpRight className="size-3.5 text-muted-foreground/50 transition-colors group-hover:text-primary" aria-hidden="true" />
+                  </div>
+                  <h3 className="text-sm font-semibold">{category.label}</h3>
+                  <p className="mt-2 min-h-10 text-xs leading-5 text-muted-foreground">{category.description}</p>
+                  <p className="mt-4 border-t pt-3 text-[10px] text-muted-foreground">
+                    {count > 0 ? `${count} ${count === 1 ? 'entry' : homepage.database.countSuffix}` : homepage.database.emptyCountLabel}
+                  </p>
+                </Card>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <div className="grid gap-7 border-t py-9 md:grid-cols-2 sm:py-10">
+        <ArticleSection id="updates" config={homepage.updates} articles={latestUpdates} icon={Newspaper} />
+        <ArticleSection id="events" config={homepage.events} articles={latestEvents} icon={CalendarDays} />
+      </div>
+      <div className="border-t pt-9 sm:pt-10">
+        <ArticleSection id="guides" config={homepage.guides} articles={latestGuides} icon={BookOpen} columns />
+      </div>
     </div>
   );
 }
 
-function SectionHeader({
-  title,
-  subtitle,
-  href,
-  linkLabel,
-}: {
-  title: string;
-  subtitle?: string;
-  href?: string;
-  linkLabel?: string;
+function ArticleSection({ id, config, articles, icon: Icon, columns = false }: {
+  id: string;
+  config: { title: string; subtitle: string; href: string; linkLabel: string; emptyTitle: string; emptyDescription: string };
+  articles: ArticleMeta[];
+  icon: LucideIcon;
+  columns?: boolean;
 }) {
   return (
-    <div className="flex items-baseline justify-between mb-4">
-      <div className="flex items-baseline gap-3">
-        <h2 className="text-xl font-bold text-foreground">{title}</h2>
-        {subtitle && <span className="text-sm text-muted-foreground hidden sm:inline">{subtitle}</span>}
+    <section aria-labelledby={`${id}-title`}>
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h2 id={`${id}-title`} className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+            <Icon className="size-4 text-muted-foreground" aria-hidden="true" />{config.title}
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">{config.subtitle}</p>
+        </div>
+        <Link href={config.href} className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-primary">
+          {config.linkLabel}<ArrowRight className="size-3.5" aria-hidden="true" />
+        </Link>
       </div>
-      {href && linkLabel && (
-        <Button asChild variant="link" className="h-auto p-0 text-indigo-600 dark:text-indigo-400">
-          <Link href={href}>
-            {linkLabel}
-            <ChevronRight className="size-4" />
-          </Link>
-        </Button>
+      {articles.length > 0 ? (
+        <div className={columns ? 'grid gap-3 sm:grid-cols-2 lg:grid-cols-3' : 'grid gap-3'}>
+          {articles.slice(0, 3).map((article) => (
+            <Link key={article.slug} href={`${config.href}/${article.slug}`} className="group rounded-xl">
+              <Card className="h-full gap-0 p-5 shadow-none transition-colors group-hover:border-primary/40">
+                <div className="mb-4 flex items-center justify-between gap-3 text-xs text-muted-foreground">
+                  <Badge variant="secondary" className="rounded-md text-[10px] font-normal">{article.tags?.[0] ?? config.title}</Badge>
+                  {article.date && <time dateTime={article.date}>{article.date}</time>}
+                </div>
+                <h3 className="flex items-start justify-between gap-3 text-sm font-semibold leading-6 group-hover:text-primary">
+                  {article.title}<ArrowUpRight className="mt-1 size-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                </h3>
+                <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{article.description}</p>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="flex min-h-40 items-center gap-4 rounded-xl border border-dashed bg-card/40 p-6">
+          <span className="flex size-11 shrink-0 items-center justify-center rounded-xl border bg-card"><Icon className="size-5 text-muted-foreground" aria-hidden="true" /></span>
+          <div>
+            <h3 className="text-sm font-medium">{config.emptyTitle}</h3>
+            <p className="mt-1.5 max-w-sm text-sm leading-6 text-muted-foreground">{config.emptyDescription}</p>
+          </div>
+        </div>
       )}
-    </div>
+    </section>
   );
 }

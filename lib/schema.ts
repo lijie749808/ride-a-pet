@@ -1,7 +1,7 @@
 import type { ContentStatus } from './publication';
 
 export type Rarity = 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
-export type EntityType = 'items' | 'pets' | 'weapons' | 'locations' | 'npcs' | 'quests';
+export type EntityType = import('./database-config').DatabaseSlug;
 export type ArticleCategory = 'guides' | 'updates' | 'codes' | 'events' | 'faqs';
 
 export interface ObtainMethod {

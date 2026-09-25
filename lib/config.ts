@@ -7,11 +7,11 @@
 
 export const siteConfig = {
   // ── Identity ──────────────────────────────────────────────────────────────
-  name: 'GameWiki',
+  name: 'Ride a Pet Wiki',
   logo: '/logo.png',
-  tagline: 'The most comprehensive community-driven encyclopedia for the game.',
+  tagline: 'Find your next pet. Plan your next adventure.',
   description:
-    'The most comprehensive community-driven encyclopedia for the game. Browse items, weapons, pets, guides and more.',
+    'Explore Ride a Pet Wiki for pets, eggs, rebirths, locations, mutations, gears, and food. Find game updates, events, and guides for your next adventure.',
 
   // ── Homepage hero: game meta + call-to-action links (all editable) ─────────
   hero: {
@@ -34,7 +34,7 @@ export const siteConfig = {
    * Production URL — used for canonical links, sitemap, og:url, JSON-LD.
    * Set NEXT_PUBLIC_SITE_URL=https://yourdomain.com in your .env.production
    */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.com',
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://rideapet.gamehubs.wiki/',
 
   // ── 统计与站长验证：填入对应 ID / 验证码，留空关闭；修改后重新构建部署 ──────
   analytics: {
@@ -51,109 +51,66 @@ export const siteConfig = {
     bing: '',
   },
 
-  // ── Navigation (drives Navbar dropdown menus) ─────────────────────────────
-  nav: [
-    {
-      id: 'database',
-      label: 'Database',
-      items: [
-        { label: 'Items',     href: '/items', },
-        { label: 'Weapons',   href: '/weapons', },
-        { label: 'Pets',      href: '/pets', },
-        { label: 'Locations', href: '/locations', },
-        { label: 'NPCs',      href: '/npcs', },
-        { label: 'Quests',    href: '/quests', },
-      ],
-    },
-    {
-      id: 'articles',
-      label: 'Articles',
-      items: [
-        { label: 'Guides',  href: '/guides', },
-        { label: 'Updates', href: '/updates', },
-        { label: 'Codes',   href: '/codes', },
-        { label: 'Events',  href: '/events', },
-        { label: 'FAQs',    href: '/faqs', },
-      ],
-    }
-  ],
-
-  // ── Homepage: Database category cards ─────────────────────────────────────
+  // Shared by the top navigation and homepage database cards.
   dbCategories: [
-    { label: 'Items',     href: '/items', },
-    { label: 'Weapons',   href: '/weapons', },
-    { label: 'Pets',      href: '/pets', },
-    { label: 'Locations', href: '/locations', },
-    { label: 'NPCs',      href: '/npcs', },
-    { label: 'Quests',    href: '/quests', },
+    { label: 'Pets', href: '/pets', description: 'Meet your next companion.' },
+    { label: 'Eggs', href: '/eggs', description: 'Discover what you can hatch.' },
+    { label: 'Rebirths', href: '/rebirths', description: 'Plan your next fresh start.' },
+    { label: 'Locations', href: '/locations', description: 'Explore every destination.' },
+    { label: 'Mutations', href: '/mutations', description: 'Discover special variations.' },
+    { label: 'Gears', href: '/gears', description: 'Find the right equipment.' },
+    { label: 'Food', href: '/food', description: 'Keep your pets adventure-ready.' },
   ],
 
-  // ── Homepage: content blocks ──────────────────────────────────────────────
+  nav: [
+    { label: 'Home', href: '/' },
+    { label: 'Updates', href: '/updates' },
+    { label: 'Events', href: '/events' },
+    { label: 'Guides', href: '/guides' },
+  ],
+
   homepage: {
+    seo: {
+      title: 'Ride a Pet Wiki | Pets, Eggs, Rebirths & Guides',
+    },
     database: {
-      title: 'Explore Database',
-      subtitle: 'Everything you need to know, all in one place.',
-      emptyCountLabel: 'Browse database',
+      title: 'Explore the database',
+      subtitle: 'Everything you need, one category away.',
+      emptyCountLabel: 'Explore database',
       countSuffix: 'entries',
     },
-    overview: {
-      title: 'Game Overview',
-      subtitle: 'A quick look at what awaits you.',
-      cards: [
-        { title: 'Explore a Living World', description: 'Travel through varied locations, uncover secrets, and meet memorable characters.' },
-        { title: 'Collect & Upgrade', description: 'Find powerful gear, rare collectibles, and companions to build your ideal loadout.' },
-        {
-          title: 'Take on New Challenges',
-          emptyDescription: 'Complete quests, defeat tough enemies, and master each update as it arrives.',
-          recentItemsDescription: 'Browse {count} recently added item{plural}, then complete quests and master every update.',
-        },
-      ],
-    },
     updates: {
-      title: 'Latest Updates',
+      title: 'Latest updates',
+      subtitle: 'Keep up with what’s new.',
       href: '/updates',
-      linkLabel: 'View all updates',
-      entries: [
-        { version: 'v1.5', title: 'Summer Expansion', description: 'New areas, quests, and limited-time rewards to discover.' },
-        { version: 'v1.4', title: 'Companions Update', description: 'Meet new pets and unlock fresh ways to customize your journey.' },
-        { version: 'v1.3', title: 'Combat Rebalance', description: 'A round of ability improvements, weapon tuning, and quality-of-life fixes.' },
-      ],
+      linkLabel: 'All updates',
+      emptyTitle: 'More adventures ahead',
+      emptyDescription: 'Check back for the latest updates and patch notes.',
+    },
+    events: {
+      title: 'Events',
+      subtitle: 'A little something extra to explore.',
+      href: '/events',
+      linkLabel: 'All events',
+      emptyTitle: 'Watch this space',
+      emptyDescription: 'Event news and limited-time activities will appear here.',
     },
     guides: {
-      title: 'Popular Guides',
+      title: 'Guides & tips',
+      subtitle: 'A helping hand for your next step.',
       href: '/guides',
-      linkLabel: 'Browse all guides',
-      fallback: [
-        { slug: 'getting-started', title: 'Beginner Guide', description: 'Learn the essentials and get started quickly.', date: '' },
-        { slug: 'farming-tips', title: 'Best Farming Routes', description: 'Earn resources efficiently with these reliable routes.', date: '' },
-        { slug: 'combat-basics', title: 'Combat Basics', description: 'Build a stronger loadout and win more encounters.', date: '' },
-      ],
-    },
-    tools: {
-      title: 'Tools',
-      subtitle: 'Plan your next adventure.',
-      entries: [
-        { title: 'Calculator', href: '/calculator', description: 'Compare costs, stats, and upgrade requirements.' },
-        { title: 'Tracker', href: '/tracker', description: 'Keep track of your collection, quests, and goals.' },
-      ],
-    },
-    faq: {
-      title: 'FAQ',
-      href: '/faqs',
-      linkLabel: 'View all FAQs',
-      entries: [
-        { question: 'How often is the wiki updated?', answer: 'We update pages whenever new game content is released or community information is verified.' },
-        { question: 'Can I contribute information?', answer: 'Yes. Community contributions help keep the wiki accurate and complete.' },
-        { question: 'Where can I find redeemable codes?', answer: 'Check the Codes section for currently active rewards and redemption instructions.' },
-      ],
+      linkLabel: 'All guides',
+      emptyTitle: 'Your adventure starts here',
+      emptyDescription: 'New player guides and useful tips are on the way.',
     },
   },
 
   footer: {
-    description: 'Community Encyclopedia',
+    description: 'An independent community wiki.',
     links: [
+      { label: 'Pets', href: '/pets' },
       { label: 'Guides', href: '/guides' },
-      { label: 'Items', href: '/items' },
+      { label: 'Codes', href: '/codes' },
       { label: 'FAQs', href: '/faqs' },
     ],
   },

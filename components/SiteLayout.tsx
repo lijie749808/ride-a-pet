@@ -1,124 +1,68 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import {
-  Search,
-  Backpack,
-  Swords,
-  PawPrint,
-  Map as MapIcon,
-  Users,
-  ScrollText,
-  BookOpen,
-  Newspaper,
-  Gift,
-  PartyPopper,
-  HelpCircle,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/lib/config';
-import { Input } from '@/components/ui/input';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarInset,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-  SidebarRail,
-  SidebarTrigger,
-} from '@/components/ui/sidebar';
-
-const NAV_ICONS: Record<string, LucideIcon> = {
-  Items: Backpack,
-  Weapons: Swords,
-  Pets: PawPrint,
-  Locations: MapIcon,
-  NPCs: Users,
-  Quests: ScrollText,
-  Guides: BookOpen,
-  Updates: Newspaper,
-  Codes: Gift,
-  Events: PartyPopper,
-  FAQs: HelpCircle,
-};
+import { cn } from '@/lib/utils';
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-
-  const isActive = (href: string) =>
-    pathname === href || pathname.startsWith(href + '/');
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
-    <SidebarProvider>
-      <Sidebar collapsible="icon">
-        <SidebarHeader>
-          <Link
-            href="/"
-            aria-label={siteConfig.name}
-            className="flex items-center gap-2 px-2 py-1.5 font-bold text-lg group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
-          >
-            <Image
-              src={siteConfig.logo}
-              alt=""
-              width={20}
-              height={20}
-              className="size-5 shrink-0 object-contain"
-            />
-            <span className="group-data-[collapsible=icon]:hidden">{siteConfig.name}</span>
+    <div className="flex min-h-screen flex-col">
+      <a href="#main-content" className="sr-only fixed left-4 top-4 z-50 rounded-md bg-primary px-4 py-2 text-primary-foreground focus:not-sr-only">
+        Skip to content
+      </a>
+      <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-6 px-4 pt-4 sm:flex-nowrap sm:px-6 sm:pt-0">
+          <Link href="/" aria-label={`${siteConfig.name} home`} className="flex shrink-0 items-center gap-2.5 font-bold tracking-tight">
+            <Image src={siteConfig.logo} alt="" width={36} height={36} className="size-9 rounded-lg object-contain" />
+            <span className="text-lg">{siteConfig.name}</span>
           </Link>
-        </SidebarHeader>
+          <nav aria-label="Main navigation" className="-mb-px flex w-full gap-6 overflow-x-auto sm:w-auto sm:gap-7">
+            {siteConfig.nav.map((item) => (
+              <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}
+                className={cn('flex min-h-14 shrink-0 items-center border-b-2 text-sm font-medium transition-colors sm:min-h-18',
+                  isActive(item.href) ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground')}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        <div className="border-t border-border/60">
+          <nav aria-label="Database navigation" className="mx-auto flex max-w-6xl items-center gap-1 overflow-x-auto px-4 py-2 sm:px-6">
+            <span className="mr-4 hidden shrink-0 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">Database</span>
+            {siteConfig.dbCategories.map((item) => (
+              <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}
+                className={cn('shrink-0 rounded-md px-3 py-2 text-sm transition-colors',
+                  isActive(item.href) ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-accent hover:text-foreground')}>
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </header>
 
-        <SidebarContent>
-          {siteConfig.nav.map((group) => (
-            <SidebarGroup key={group.id}>
-              <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
-              <SidebarMenu>
-                {group.items.map((item) => {
-                  const Icon = NAV_ICONS[item.label] ?? BookOpen;
-                  return (
-                    <SidebarMenuItem key={item.href}>
-                      <SidebarMenuButton asChild isActive={isActive(item.href)} tooltip={item.label}>
-                        <Link href={item.href}>
-                          <Icon strokeWidth={1.75} />
-                          <span>{item.label}</span>
-                        </Link>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  );
-                })}
-              </SidebarMenu>
-            </SidebarGroup>
-          ))}
-        </SidebarContent>
+      <main id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</main>
 
-        <SidebarFooter>
-          <p className="px-2 py-1 text-xs text-sidebar-foreground/60 group-data-[collapsible=icon]:hidden">
-            {siteConfig.name} — Community Wiki
-          </p>
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
-
-      <SidebarInset>
-        {/* Top bar */}
-        <header className="sticky top-0 z-40 flex h-14 items-center gap-3 border-b bg-background px-4">
-          <SidebarTrigger />
-          <div className="relative ml-auto w-full max-w-xs">
-            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input type="search" placeholder="Search wiki…" className="h-9 pl-9" />
+      <footer className="mt-10 border-t">
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 px-4 py-8 sm:flex-row sm:items-center sm:px-6">
+          <div>
+            <Link href="/" className="text-sm font-semibold">{siteConfig.name}</Link>
+            <p className="mt-1.5 text-xs text-muted-foreground">{siteConfig.footer.description}</p>
           </div>
-        </header>
-
-        <div className="flex-1">{children}</div>
-      </SidebarInset>
-    </SidebarProvider>
+          <nav aria-label="Footer navigation" className="flex flex-wrap gap-6">
+            {siteConfig.footer.links.map((link) => (
+              <Link key={link.href} href={link.href} className="flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground">
+                {link.label}<ArrowUpRight aria-hidden="true" className="size-3" />
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </footer>
+    </div>
   );
 }

@@ -47,6 +47,52 @@ export interface DatabaseDefinition {
  * Its key is used as both the URL segment and the content/entities directory.
  */
 export const databases = {
+  eggs: {
+    label: 'Eggs',
+    description: 'Explore Ride a Pet eggs, hatchable pets, and how to obtain each egg.',
+    card: { badgeField: 'rarity' },
+    detail: {
+      quickFacts: [{ label: 'Rarity', field: 'rarity' }, { label: 'Price', field: 'price' }],
+      sections: [{ type: 'table', title: 'Hatch Chances', field: 'hatchChances' }, { type: 'methods', title: 'How to Obtain', field: 'obtainMethods' }],
+    },
+  },
+  rebirths: {
+    label: 'Rebirths',
+    description: 'Plan your Ride a Pet rebirths with requirements and rewards.',
+    detail: {
+      quickFacts: [{ label: 'Rebirth Level', field: 'level' }],
+      sections: [{ type: 'table', title: 'Requirements', field: 'requirements' }, { type: 'table', title: 'Rewards', field: 'rewards' }],
+    },
+  },
+  mutations: {
+    label: 'Mutations',
+    description: 'Discover Ride a Pet mutations, special variations, and their effects.',
+    card: { badgeField: 'rarity' },
+    detail: {
+      quickFacts: [{ label: 'Rarity', field: 'rarity' }],
+      sections: [{ type: 'table', title: 'Effects', field: 'effects' }, { type: 'methods', title: 'How to Obtain', field: 'obtainMethods' }],
+    },
+  },
+  gears: {
+    label: 'Gears',
+    description: 'Browse Ride a Pet gears, equipment stats, and how to obtain them.',
+    card: { badgeField: 'rarity', metaField: 'type' },
+    category: { field: 'type', label: 'Type' },
+    detail: {
+      quickFacts: [{ label: 'Type', field: 'type' }, { label: 'Rarity', field: 'rarity' }],
+      sections: [{ type: 'table', title: 'Stats', field: 'stats' }, { type: 'methods', title: 'How to Obtain', field: 'obtainMethods' }],
+    },
+  },
+  food: {
+    label: 'Food',
+    description: 'Explore Ride a Pet food, its effects, and where to find it.',
+    card: { metaField: 'type' },
+    category: { field: 'type', label: 'Type' },
+    detail: {
+      quickFacts: [{ label: 'Type', field: 'type' }, { label: 'Price', field: 'price' }],
+      sections: [{ type: 'table', title: 'Effects', field: 'effects' }, { type: 'methods', title: 'How to Obtain', field: 'obtainMethods' }],
+    },
+  },
   items: {
     label: 'Items',
     description: 'Browse all items in the game.',
