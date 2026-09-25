@@ -8,7 +8,7 @@
 export const siteConfig = {
   // ── Identity ──────────────────────────────────────────────────────────────
   name: 'GameWiki',
-  logo: '🎮',
+  logo: '/logo.png',
   tagline: 'The most comprehensive community-driven encyclopedia for the game.',
   description:
     'The most comprehensive community-driven encyclopedia for the game. Browse items, weapons, pets, guides and more.',

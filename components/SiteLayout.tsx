@@ -1,10 +1,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Search,
-  Gamepad2,
   Backpack,
   Swords,
   PawPrint,
@@ -62,9 +62,16 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
         <SidebarHeader>
           <Link
             href="/"
+            aria-label={siteConfig.name}
             className="flex items-center gap-2 px-2 py-1.5 font-bold text-lg group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:px-0"
           >
-            <Gamepad2 className="size-5 shrink-0 text-indigo-600 dark:text-indigo-400" strokeWidth={1.75} />
+            <Image
+              src={siteConfig.logo}
+              alt=""
+              width={20}
+              height={20}
+              className="size-5 shrink-0 object-contain"
+            />
             <span className="group-data-[collapsible=icon]:hidden">{siteConfig.name}</span>
           </Link>
         </SidebarHeader>
